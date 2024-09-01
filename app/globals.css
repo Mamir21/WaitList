@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: InterBlack;
+}
+
+@layer base {
+  body {
+    @apply dark:bg-[#07070A] bg-[#ffffff] transition-all ease-in duration-200;
+  }
+}
