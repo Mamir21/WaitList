@@ -20,7 +20,7 @@ const itemVariants = {
     opacity: 0,
   },
   open: { opacity: 1 },
-};
+}
 
 const sideVariants = {
   closed: {
@@ -35,7 +35,7 @@ const sideVariants = {
       staggerDirection: 1,
     },
   },
-};
+}
 
 const ButtonVariant = {
   closed: {
@@ -47,7 +47,7 @@ const ButtonVariant = {
     height: "25rem",
     transition: { when: "beforeChildren", duration: 0.1 },
   },
-};
+}
 
 let textvariant = {
   hidden: {
@@ -56,7 +56,7 @@ let textvariant = {
   show: {
     opacity: 1,
   },
-};
+}
 
 const people = [
   {
@@ -109,7 +109,7 @@ const people = [
     },
     href: "",
   },
-];
+]
 
 function Headpage() {
   const [open, cycleOpen] = useCycle(false, true);
@@ -124,22 +124,22 @@ function Headpage() {
   const rotate = useSpring(
     useTransform(x, [-100, 100], [-45, 45]),
     springConfig
-  );
+  )
 
   const translateX = useSpring(
     useTransform(x, [-100, 100], [-50, 20]),
     springConfig
-  );
+  )
 
   const handleMouseMove = (event) => {
     const halfWidth = event.target.offsetWidth / 2;
     x.set(event.nativeEvent.offsetX - halfWidth);
-  };
+  }
 
   const handleClick = () => {
     setIsOpen(!isOpen);
     cycleOpen(!open);
-  };
+  }
 
   const [imageSources, setImageSources] = useState({});
 
@@ -147,7 +147,7 @@ function Headpage() {
     const sources = {};
     people.forEach((person) => {
       sources[person.id] = resolvedTheme === "dark" ? person.image.dark : person.image.light;
-    });
+    })
     setImageSources(sources);
   }, [resolvedTheme]);
 
@@ -187,8 +187,8 @@ function Headpage() {
                     }}
                     className="absolute -top-16 -left-1/2 translate-x-1/2 flex text-xs  flex-col items-center justify-center rounded-md bg-black z-50 shadow-xl px-4 py-2"
                   >
-                    <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px " />
-                    <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px " />
+                    <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent h-px" />
+                    <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px" />
                     <div className="font-bold text-white relative z-30 text-base">
                       {testimonial.name}
                     </div>
@@ -213,7 +213,7 @@ function Headpage() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default Headpage;
@@ -225,7 +225,8 @@ const Switch = ({ checked, setChecked }) => {
   let toggleTheme = (e) => {
     setChecked(e.target.checked);
     setTheme(otherTheme);
-  };
+  }
+
   return (
     <form className="flex space-x-4  antialiased items-center">
       <label
@@ -262,8 +263,8 @@ const Switch = ({ checked, setChecked }) => {
         />
       </label>
     </form>
-  );
-};
+  )
+}
 
 export function ThemeToggleNav({ className, rel, mouseX, ...props }) {
   let { resolvedTheme, setTheme } = useTheme();
