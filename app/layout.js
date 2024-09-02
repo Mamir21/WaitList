@@ -1,7 +1,6 @@
 import Theming from "@/Theme/Theming";
-import "./globals.css";
-
 import Headpage from "./Header/page";
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (

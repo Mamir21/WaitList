@@ -1,5 +1,5 @@
 {
-  "name": "ecom2",
+  "name": "waitlist",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.3.7",
     "@hookform/resolvers": "^3.3.1",
     "autoprefixer": "10.4.15",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",
-    "mongoose": "^6.11.1",
     "next": "^14.2.7",
     "next-themes": "^0.2.1",
     "postcss": "^8.4.42",

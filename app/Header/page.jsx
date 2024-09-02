@@ -2,16 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-
-import {
-  PiTwitterLogoThin,
-  PiInstagramLogoThin,
-  PiGithubLogoLight,
-} from "react-icons/pi";
 
 import {
   AnimatePresence,
@@ -63,77 +56,111 @@ let textvariant = {
   show: {
     opacity: 1,
   },
-}
-
-let Icons = [
-  { name: <PiTwitterLogoThin />, href: "https://twitter.com/Joenaldo" },
-  { name: <PiInstagramLogoThin />, href: "https://instagram.com/Joscriptt " },
-  { name: <PiGithubLogoLight />, href: "https://github.com/Joscriptt" },
-]
+};
 
 const people = [
   {
     id: 1,
-    name: "INSTAGRAM",
-    designation: "@Joscriptt",
-    image: "/img/time.png",
-    href: "https://instagram.com/Joscriptt ",
+    name: "Feature 1️⃣",
+    designation: "Aggregate data on spending, types of spending, and income-to-spending ratio, with visualizations of current spending and detailed breakdowns.",
+    image: {
+      light: "/img/fire.png",
+      dark: "/img/firew.png",
+    },
+    href: "",
   },
   {
     id: 2,
-    name: "TWITTER",
-    designation: "@Joenaldo",
-    image: "/img/alarm.png",
-    href: "https://twitter.com/Joenaldo",
+    name: "Feature 2️⃣",
+    designation: "Automate tracking of spending details using Plaid, and get AI-driven suggestions to meet your savings goals.",
+    image: {
+      light: "/img/fire1.png",
+      dark: "/img/fire1.png",
+    },
+    href: "",
   },
   {
     id: 3,
-    name: "GITHUB",
-    designation: "Joscriptt",
-    image: "/img/party.png",
-    href: "https://github.com/Joscriptt",
+    name: "Feature 3️⃣",
+    designation: "Set up to 10 savings goals with progress tracking and monthly breakdowns.",
+    image: {
+      light: "/img/fire2.png",
+      dark: "/img/fire2.png",
+    },
+    href: "",
   },
-]
+  {
+    id: 4,
+    name: "Feature 4️⃣",
+    designation: "Utilize AI-enhanced visualization of current spending, projections, and potential savings.",
+    image: {
+      light: "/img/fire3.png",
+      dark: "/img/fire3.png",
+    },
+    href: "",
+  },
+  {
+    id: 5,
+    name: "Feature 5️⃣",
+    designation: "Enjoy a wishlist feature with AI capabilities for searching up prices.",
+    image: {
+      light: "/img/fire4.png",
+      dark: "/img/fire4.png",
+    },
+    href: "",
+  },
+];
 
 function Headpage() {
   const [open, cycleOpen] = useCycle(false, true);
   const [isOpen, setIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const springConfig = { stiffness: 100, damping: 5 };
   const x = useMotionValue(0);
-  
+
   const rotate = useSpring(
     useTransform(x, [-100, 100], [-45, 45]),
     springConfig
-  )
+  );
 
   const translateX = useSpring(
     useTransform(x, [-100, 100], [-50, 20]),
     springConfig
-  )
+  );
 
   const handleMouseMove = (event) => {
     const halfWidth = event.target.offsetWidth / 2;
     x.set(event.nativeEvent.offsetX - halfWidth);
-  }
+  };
 
   const handleClick = () => {
     setIsOpen(!isOpen);
     cycleOpen(!open);
-  }
+  };
+
+  const [imageSources, setImageSources] = useState({});
+
+  useEffect(() => {
+    const sources = {};
+    people.forEach((person) => {
+      sources[person.id] = resolvedTheme === "dark" ? person.image.dark : person.image.light;
+    });
+    setImageSources(sources);
+  }, [resolvedTheme]);
 
   return (
     <>
-      <div className="flex justify-between md:max-w-5xl max-w-lg mx-auto lg:mt-16 mt-11 md:px-8 px-9">
+      <div className="flex justify-between md:max-w-5xl max-w-lg mx-auto lg:mt-16 mt-20 md:px-8 px-9">
         <div className="flex gap-x-3 items-center">
           <Switch checked={checked} setChecked={setChecked} />
         </div>
-        <div className="flex flex-row gap-x-4  ">
-          {people.map((testimonial, idx) => (
+        <div className="flex flex-row gap-x-3 md:gap-x-20 lg:gap-x-20">
+          {people.map((testimonial) => (
             <div
-              className=" relative group"
+              className="relative group"
               key={testimonial.name}
               onMouseEnter={() => setHoveredIndex(testimonial.id)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -165,7 +192,7 @@ function Headpage() {
                     <div className="font-bold text-white relative z-30 text-base">
                       {testimonial.name}
                     </div>
-                    <div className="text-white text-xs">
+                    <div className="text-white text-sm">
                       {testimonial.designation}
                     </div>
                   </motion.div>
@@ -176,7 +203,7 @@ function Headpage() {
                   onMouseMove={handleMouseMove}
                   height={100}
                   width={100}
-                  src={testimonial.image}
+                  src={imageSources[testimonial.id]}
                   alt={testimonial.name}
                   className="object-cover !m-0 !p-0 object-top rounded-full h-8 w-8  group-hover:scale-105 group-hover:z-30   relative transition duration-500"
                 />
@@ -189,9 +216,6 @@ function Headpage() {
   );
 }
 
-{
-  /* <ThemeToggleNav /> */
-}
 export default Headpage;
 
 const Switch = ({ checked, setChecked }) => {
@@ -225,7 +249,6 @@ const Switch = ({ checked, setChecked }) => {
             duration: 0.3,
             delay: 0.1,
           }}
-          // key={String(checked)}
           className={twMerge(
             "h-[20px] block rounded-full bg-white shadow-md z-10"
           )}
@@ -245,7 +268,7 @@ const Switch = ({ checked, setChecked }) => {
 export function ThemeToggleNav({ className, rel, mouseX, ...props }) {
   let { resolvedTheme, setTheme } = useTheme();
   let otherTheme = resolvedTheme === "dark" ? "light" : "dark";
-  let [mounted, setMounted] = useState(false);
+  let [setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);

@@ -1,7 +1,5 @@
-import PageHook from "@/app/pageHook";
+import Countdown from "@/app/countdown";
 
-function page() {
-  return <PageHook />;
+export default function main() {
+  return <Countdown />;
 }
-
-export default page;
