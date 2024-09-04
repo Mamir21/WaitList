@@ -97,7 +97,7 @@ function Countdown() {
                       mass: 0.1,
                     },
                   }}
-                  className="px-6 py-2 rounded-md relative radial-gradient"
+                  className="px-6 py-2 rounded-md relative radial-gradient border border-neutral-500 dark:border-neutral-700"
                 >
                   <span className="flex items-center light: text-neutral-800 dark:text-neutral-100 tracking-wide h-full w-full relative linear-mask">
                     Waitlist
