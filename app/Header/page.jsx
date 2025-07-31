@@ -109,7 +109,7 @@ const people = [
     },
     href: "",
   },
-]
+] 
 
 function Headpage() {
   const [open, cycleOpen] = useCycle(false, true);
